@@ -21,10 +21,17 @@ const CityCard = ({ city }) => {
         <div className="city-info" key={index}>
           <p className="date">{getDayOfWeek(item.dt)}</p>
           <img
-            src={`https://raw.githubusercontent.com/ismailcet/React-Weather-App/master/src/Images/${item.weather[0].icon}%402x.png`}
+            className="weather-icon"
+            src={`https://raw.githubusercontent.com/ismailcet/React-Weather-App/master/src/Images/${item.weather[0].icon}.png`}
             alt={item.weather[0].main}
           />
-          {item.weather[0].main}
+          <p className="celcius">
+            {item.temp.day.toFixed(0)}
+            <span>°C</span> / {item.temp.night.toFixed(0)}
+            <span>°C</span>
+          </p>
+
+          <p className="description">{item.weather[0].main}</p>
         </div>
       ))}
     </div>

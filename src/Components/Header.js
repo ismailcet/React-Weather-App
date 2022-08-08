@@ -17,10 +17,11 @@ const Header = () => {
         onClick={(e) => {
           e.preventDefault();
           setCity(value);
+          console.log(value);
           setValue("");
         }}
       >
-        Click
+        Search
       </button>
     </div>
   );

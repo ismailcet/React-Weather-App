@@ -21,12 +21,12 @@ const ShowingWeather = () => {
   }, [, city]);
 
   return (
-    <div className="weather">
+    <div className="Weather">
       {loading ? (
-        <h2>Loading...</h2>
+        <h2 className="loading">Loading...</h2>
       ) : (
         <div className="weather-container">
-          <h2 className="city-name">{data.city.name}</h2>
+          <h2 className="city-name">{city}</h2>
           <CityCard city={data} />
         </div>
       )}
