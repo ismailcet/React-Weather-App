@@ -1,26 +1,35 @@
 import React, { useContext, useEffect, useState } from "react";
 import CityContext from "../Context/CityContext";
+import CityCard from "./CityCard";
+import axios from "axios";
 
 const ShowingWeather = () => {
   const { city, setCity } = useContext(CityContext);
-  const [info, setInfo] = useState({});
+  const [data, setData] = useState();
+  const [loading, setLoading] = useState(true);
   const key = `886705b4c1182eb1c69f28eb8c520e20`;
   const url = `https://api.openweathermap.org/data/2.5/forecast/daily?q=${city}&units=metric&cnt=7&appid=${key}`;
-  const fetchData = async () => {
-    fetch(url)
-      .then((res) => res.json())
-      .then((data) => {
-        setInfo(data);
-      })
-      .catch((err) => console.log(err));
-  };
+
   useEffect(() => {
-    fetchData();
-  }, []);
-  console.log(info);
+    axios(url)
+      .then((res) => setData(res.data))
+      .catch((error) => console.log(error))
+      .finally(() => {
+        setLoading(false);
+      });
+    console.log(data);
+  }, [, city]);
+
   return (
-    <div>
-      <h2></h2>
+    <div className="weather">
+      {loading ? (
+        <h2>Loading...</h2>
+      ) : (
+        <div className="weather-container">
+          <h2 className="city-name">{data.city.name}</h2>
+          <CityCard city={data} />
+        </div>
+      )}
     </div>
   );
 };
